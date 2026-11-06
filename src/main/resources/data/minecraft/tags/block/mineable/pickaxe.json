@@ -1,0 +1,10 @@
+{
+  "replace": false,
+  "values": [
+    "ruleta:puerta_bunker",
+    "ruleta:ladrillo_bunker",
+    "ruleta:escalera_bunker",
+    "ruleta:piso_bunker",
+    "ruleta:peligro_bunker"
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "equipment",
+  "pattern": [
+    "DHD",
+    "HNH",
+    "DHD"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "H": {
+      "item": "minecraft:iron_ingot"
+    },
+    "N": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "result": {
+    "id": "ruleta:linterna"
+  }
+}

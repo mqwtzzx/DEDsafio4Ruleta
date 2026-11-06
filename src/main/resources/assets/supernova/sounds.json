@@ -1,0 +1,8 @@
+{
+  "idle_hum": { "subtitle": "subtitles.supernova.idle", "sounds": [ { "name": "supernova:idle_hum", "stream": true } ] },
+  "charge": { "subtitle": "subtitles.supernova.charge", "sounds": [ { "name": "supernova:charge", "stream": true } ] },
+  "heartbeat": { "subtitle": "subtitles.supernova.heartbeat", "sounds": [ { "name": "supernova:heartbeat" } ] },
+  "blast": { "subtitle": "subtitles.supernova.blast", "sounds": [ { "name": "supernova:blast", "stream": true } ] },
+  "wave": { "subtitle": "subtitles.supernova.wave", "sounds": [ { "name": "supernova:wave", "stream": true } ] },
+  "music": { "subtitle": "subtitles.supernova.blast", "sounds": [ { "name": "supernova:music", "stream": true } ] }
+}

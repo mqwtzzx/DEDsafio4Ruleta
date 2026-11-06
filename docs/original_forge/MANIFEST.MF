@@ -1,0 +1,9 @@
+Manifest-Version: 1.0
+Specification-Title: ruleta
+Specification-Vendor: DarkPlayer
+Specification-Version: 1
+Implementation-Title: ruleta
+Implementation-Version: 1.1.0
+Implementation-Vendor: DarkPlayer
+Implementation-Timestamp: 2026-11-04T14:54:13-0500
+

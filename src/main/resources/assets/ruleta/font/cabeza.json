@@ -1,0 +1,20 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "ruleta:font/cabeza_px.png",
+      "ascent": 7,
+      "height": 8,
+      "chars": [
+        "\ue100\ue101\ue102\ue103\ue104\ue105\ue106\ue107"
+      ]
+    },
+    {
+      "type": "space",
+      "advances": {
+        "\ue110": -2.0,
+        "\ue111": -1.0
+      }
+    }
+  ]
+}

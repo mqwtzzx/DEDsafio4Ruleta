@@ -1,0 +1,12 @@
+{
+  "puerta_bunker.abrir": {
+    "category": "block",
+    "subtitle": "subtitles.ruleta.puerta_bunker.abrir",
+    "sounds": [ { "name": "ruleta:block/puerta_bunker_abrir", "attenuation_distance": 48 } ]
+  },
+  "puerta_bunker.cerrar": {
+    "category": "block",
+    "subtitle": "subtitles.ruleta.puerta_bunker.cerrar",
+    "sounds": [ { "name": "ruleta:block/puerta_bunker_cerrar", "attenuation_distance": 48 } ]
+  }
+}

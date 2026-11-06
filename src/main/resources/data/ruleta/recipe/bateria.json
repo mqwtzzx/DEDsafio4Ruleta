@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "pattern": [
+    "NDN",
+    "DCD",
+    "NDN"
+  ],
+  "key": {
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "N": {
+      "item": "minecraft:netherite_scrap"
+    }
+  },
+  "result": {
+    "id": "ruleta:bateria"
+  }
+}

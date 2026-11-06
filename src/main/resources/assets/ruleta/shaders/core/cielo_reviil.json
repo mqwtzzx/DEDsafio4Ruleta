@@ -1,0 +1,20 @@
+{
+    "blend": {
+        "func": "add",
+        "srcrgb": "srcalpha",
+        "dstrgb": "1-srcalpha"
+    },
+    "vertex": "ruleta:cielo_reviil",
+    "fragment": "ruleta:cielo_reviil",
+    "attributes": [ "Position" ],
+    "samplers": [],
+    "uniforms": [
+        { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+        { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+        { "name": "Tiempo", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Cubre", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Forma", "type": "float", "count": 4, "values": [ 0.0, 0.0, 0.0, 0.0 ] },
+        { "name": "Grieta", "type": "float", "count": 4, "values": [ 0.0, 0.0, 0.0, 0.0 ] },
+        { "name": "GrietaForma", "type": "float", "count": 4, "values": [ 0.0, 0.0, 0.0, 0.0 ] }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+  "entity.supernova.supernova": "Supernova",
+  "death.attack.supernova": "%1$s fue desintegrado por una supernova",
+  "subtitles.supernova.idle": "La estrella zumba",
+  "subtitles.supernova.charge": "La estrella colapsa",
+  "subtitles.supernova.heartbeat": "Latido de la estrella",
+  "subtitles.supernova.blast": "¡Supernova!",
+  "subtitles.supernova.wave": "Se acerca la onda expansiva"
+}

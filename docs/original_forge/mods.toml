@@ -1,0 +1,26 @@
+modLoader="javafml"
+loaderVersion="[47,)"
+license="CC-BY-NC-SA-4.0"
+
+[[mods]]
+modId="ruleta"
+version="1.1.0"
+displayName="DEDsafio 4 Ruleta Fan Project"
+authors="DarkPlayer"
+credits="Serie DEDsafio 4: EufoniaStudio"
+description='''Recreación fan de la ruleta de la serie DEDsafio 4.
+Código de la ruleta generado por Claude (Anthropic).'''
+
+[[dependencies.ruleta]]
+    modId="forge"
+    mandatory=true
+    versionRange="[47.4.15,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.ruleta]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.1,1.21)"
+    ordering="NONE"
+    side="BOTH"
