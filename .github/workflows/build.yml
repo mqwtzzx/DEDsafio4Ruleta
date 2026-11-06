@@ -11,26 +11,56 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout source
+      - name: Checkout
         uses: actions/checkout@v4
       - name: Set up Java 21
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: '21'
-      - name: Check Gradle wrapper and sources
+      - name: Check required source files
         shell: bash
         run: |
-          test -f gradlew || { echo "::error::Missing gradlew; upload extracted source files, not just ZIP"; exit 1; }
-          test -f gradle/wrapper/gradle-wrapper.jar || { echo "::error::Missing Gradle wrapper jar"; exit 1; }
-          test -d src/main/resources || { echo "::error::Missing original resources"; exit 1; }
-      - name: Compile with Java 21
+          echo "Checking source tree..."
+          test -f gradlew || { echo "::error::Missing gradlew"; exit 1; }
+          test -f build.gradle || { echo "::error::Missing build.gradle"; exit 1; }
+          test -f gradle.properties || { echo "::error::Missing gradle.properties"; exit 1; }
+          test -d src/main/java || { echo "::error::Missing src/main/java. Upload the COMPLETE extracted project (not only top-level files)."; exit 1; }
+          test -d src/main/resources || { echo "::error::Missing src/main/resources. All original resources must be uploaded without modification."; exit 1; }
+          count="$(find src/main/java src/client/java -name '*.java' -type f 2>/dev/null | wc -l)"
+          echo "Java source files found: $count"
+          test "$count" -gt 0 || { echo "::error::No Java source files found"; exit 1; }
+      - name: Install Gradle 9.8.2
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '9.8.2'
+      - name: Restore missing Gradle wrapper without editing source/resources
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ ! -f gradle/wrapper/gradle-wrapper.jar || ! -f gradle/wrapper/gradle-wrapper.properties ]]; then
+            echo "::notice::Gradle wrapper is missing, creating it with installed Gradle"
+            mkdir -p "$RUNNER_TEMP/gradle-wrapper-bootstrap"
+            (
+              cd "$RUNNER_TEMP/gradle-wrapper-bootstrap"
+              printf '' > build.gradle
+              gradle wrapper --gradle-version 9.8.2 --distribution-type bin --no-daemon
+            )
+            mkdir -p gradle/wrapper
+            cp "$RUNNER_TEMP/gradle-wrapper-bootstrap/gradle/wrapper/gradle-wrapper.jar" gradle/wrapper/
+            if [[ ! -f gradle/wrapper/gradle-wrapper.properties ]]; then
+              cp "$RUNNER_TEMP/gradle-wrapper-bootstrap/gradle/wrapper/gradle-wrapper.properties" gradle/wrapper/
+            fi
+          fi
+          test -f gradle/wrapper/gradle-wrapper.jar
+          test -f gradle/wrapper/gradle-wrapper.properties
+      - name: Build JAR with Java 21
         shell: bash
         run: |
           set -o pipefail
           chmod +x ./gradlew
           ./gradlew build --no-daemon --stacktrace 2>&1 | tee build.log
-      - name: Upload JAR
+      - name: Upload built JAR (excluding sources)
         if: success()
         uses: actions/upload-artifact@v4
         with:
@@ -38,8 +68,9 @@ jobs:
           path: |
             build/libs/*.jar
             !build/libs/*-sources.jar
+            !build/libs/*-dev.jar
           if-no-files-found: error
-      - name: Upload compilation logs
+      - name: Upload logs
         if: always()
         uses: actions/upload-artifact@v4
         with:
