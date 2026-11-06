@@ -29,7 +29,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
  * - IDimensionSpecialEffectsExtension.renderSky / renderClouds al principio de renderSky / renderClouds: si devuelven
  *   true no se dibuja el cielo / las nubes de vanilla. Aquí se consulta EfectosEclipse (el único que lo usaba).
  */
-@Mixin(LevelRenderer.class)
+@Mixin(value = LevelRenderer.class, priority = 900)
 public abstract class LevelRendererMixin {
 	@Shadow
 	@Nullable
@@ -68,8 +68,10 @@ public abstract class LevelRendererMixin {
 		ruleta$proyeccion = projectionMatrix;
 	}
 
-	// Forge: dispatchRenderStage(renderType, …) al final de renderChunkLayer, justo antes de renderType.clearRenderState()
-	@Inject(method = "renderSectionLayer", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/renderer/RenderType;clearRenderState()V"))
+	// Sodium sobreescribe renderSectionLayer y puede suprimir la llamada interna a clearRenderState.
+	// RETURN se conserva tanto en vanilla como en Sodium, tras dibujar la capa translúcida.
+	// La prioridad 900 permite inyectar DESPUÉS del overwrite de Sodium (prioridad 1000).
+	@Inject(method = "renderSectionLayer", at = @At("RETURN"))
 	private void ruleta$trasCapa(RenderType tipo, double x, double y, double z, Matrix4f frustumMatrix, Matrix4f projectionMatrix, CallbackInfo ci) {
 		if (tipo == RenderType.translucent())
 			ruleta$publicar(RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS);
