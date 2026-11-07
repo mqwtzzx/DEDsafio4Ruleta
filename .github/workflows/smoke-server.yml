@@ -14,32 +14,41 @@ permissions:
 jobs:
   server-smoke-test:
     runs-on: ubuntu-latest
-    timeout-minutes: 12
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
           java-version: '21'
-      - name: Arrancar servidor dedicado de prueba (sin mundos ni datos de usuarios)
+      - name: Iniciar servidor dedicado y verificar Minecraft Done
         shell: bash
         run: |
-          set -uo pipefail
+          set -euo pipefail
           mkdir -p run
           printf 'eula=true\n' > run/eula.txt
           printf 'online-mode=false\nmax-tick-time=-1\n' > run/server.properties
           chmod +x ./gradlew
-          timeout --signal=TERM --kill-after=10s 180s ./gradlew runServer --no-daemon --stacktrace > server-startup.log 2>&1
-          code=$?
-          tail -100 server-startup.log || true
-          echo "Gradle/test exit code: $code"
-          if grep -Eq 'Done \([0-9.,]+s\)!|Done \([0-9.,]+s\)! For help|Done \(' server-startup.log; then
-            echo "SERVER BOOT SUCCESS: Minecraft reached Done"
-            exit 0
-          fi
-          echo "::error::Server did not reach Done; inspect server-startup.log for the first error"
+          ./gradlew runServer --no-daemon --stacktrace > server-startup.log 2>&1 &
+          server_pid=$!
+          trap 'kill "$server_pid" 2>/dev/null || true; pkill -P "$server_pid" 2>/dev/null || true' EXIT
+          for ((i=0; i<160; i++)); do
+            if grep -Eq 'Done \([0-9.,]+s\)!' server-startup.log; then
+              echo "Servidor Fabric 1.21.1 iniciado: detectado 'Done'."
+              grep -E 'Loading Minecraft|ruleta 1.1.0|Done \(' server-startup.log || true
+              exit 0
+            fi
+            if ! kill -0 "$server_pid" 2>/dev/null; then
+              echo "::error::El proceso del servidor terminó antes de llegar a Done."
+              tail -120 server-startup.log
+              exit 1
+            fi
+            sleep 1
+          done
+          echo "::error::Servidor no listo tras 160 segundos."
+          tail -120 server-startup.log
           exit 1
-      - name: Publicar registro de arranque
+      - name: Guardar registro de arranque
         if: always()
         uses: actions/upload-artifact@v4
         with:
