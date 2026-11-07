@@ -1,0 +1,17 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "cloudruleta:gui/icono_cloudruleta.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        ""
+      ]
+    },
+    {
+      "type": "reference",
+      "id": "minecraft:default"
+    }
+  ]
+}

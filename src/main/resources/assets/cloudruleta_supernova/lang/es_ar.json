@@ -1,0 +1,9 @@
+{
+  "entity.cloudruleta_supernova.cloudruleta_supernova": "Supernova",
+  "death.attack.cloudruleta_supernova": "%1$s fue desintegrado por una cloudruleta_supernova",
+  "subtitles.cloudruleta_supernova.idle": "La estrella zumba",
+  "subtitles.cloudruleta_supernova.charge": "La estrella colapsa",
+  "subtitles.cloudruleta_supernova.heartbeat": "Latido de la estrella",
+  "subtitles.cloudruleta_supernova.blast": "¡Supernova!",
+  "subtitles.cloudruleta_supernova.wave": "Se acerca la onda expansiva"
+}

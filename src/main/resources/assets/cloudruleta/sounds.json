@@ -1,0 +1,208 @@
+{
+  "cloudruleta": {
+    "subtitle": "subtitles.cloudruleta.cloudruleta",
+    "sounds": [
+      {
+        "name": "cloudruleta:cloudruleta",
+        "preload": true
+      }
+    ]
+  },
+  "notificacion_mensaje": {
+    "subtitle": "subtitles.cloudruleta.notificacion_mensaje",
+    "sounds": [
+      {
+        "name": "cloudruleta:aviso_campana",
+        "preload": true
+      }
+    ]
+  },
+  "momento_reviil.musica": {
+    "subtitle": "subtitles.cloudruleta.reviil.musica",
+    "sounds": [
+      {
+        "name": "cloudruleta:momento_reviil/tema_momento",
+        "stream": true
+      }
+    ]
+  },
+  "momento_reviil.musica_cielo": {
+    "subtitle": "subtitles.cloudruleta.reviil.musica",
+    "sounds": [
+      {
+        "name": "cloudruleta:momento_reviil/tema_cielo",
+        "stream": true
+      }
+    ]
+  },
+  "momento_reviil.animacion": {
+    "subtitle": "subtitles.cloudruleta.reviil.animacion",
+    "sounds": [
+      {
+        "name": "cloudruleta:momento_reviil/entrada",
+        "stream": true
+      }
+    ]
+  },
+  "momento_reviil.retumbo": {
+    "subtitle": "subtitles.cloudruleta.reviil.cielo",
+    "sounds": [
+      {
+        "name": "cloudruleta:momento_reviil/calma",
+        "stream": true
+      }
+    ]
+  },
+  "momento_reviil.despeja": {
+    "subtitle": "subtitles.cloudruleta.reviil.cielo",
+    "sounds": [
+      {
+        "name": "cloudruleta:momento_reviil/calma",
+        "stream": true
+      }
+    ]
+  },
+  "momento_reviil.grieta_rayo": {
+    "subtitle": "subtitles.cloudruleta.reviil.grieta",
+    "sounds": [
+      {
+        "name": "cloudruleta:momento_reviil/rayo_golpe",
+        "preload": true
+      }
+    ]
+  },
+  "momento_reviil.grieta_abre": {
+    "subtitle": "subtitles.cloudruleta.reviil.grieta",
+    "sounds": [
+      {
+        "name": "cloudruleta:momento_reviil/apertura",
+        "preload": true
+      }
+    ]
+  },
+  "momento_reviil.grieta_cierra": {
+    "subtitle": "subtitles.cloudruleta.reviil.grieta",
+    "sounds": [
+      {
+        "name": "cloudruleta:momento_reviil/cierre",
+        "preload": true
+      }
+    ]
+  },
+  "muerte_animacion.sonido": {
+    "subtitle": "subtitles.cloudruleta.escenas.muerte",
+    "sounds": [
+      {
+        "name": "cloudruleta:muerte_animacion/sonido",
+        "preload": true
+      }
+    ]
+  },
+  "momento_nutria.musica": {
+    "subtitle": "subtitles.cloudruleta.escenas.nutria",
+    "sounds": [
+      {
+        "name": "cloudruleta:momento_nutria/musica",
+        "stream": true
+      }
+    ]
+  },
+  "eclipse.ambiente": {
+    "subtitle": "subtitles.cloudruleta.eclipse",
+    "sounds": [
+      {
+        "name": "cloudruleta:eclipse/ambiente",
+        "stream": true
+      }
+    ]
+  },
+  "eclipse.anillo": {
+    "subtitle": "subtitles.cloudruleta.eclipse",
+    "sounds": [
+      {
+        "name": "cloudruleta:eclipse/anillo",
+        "preload": true
+      }
+    ]
+  },
+  "eclipse.totalidad": {
+    "subtitle": "subtitles.cloudruleta.eclipse",
+    "sounds": [
+      {
+        "name": "cloudruleta:eclipse/totalidad",
+        "preload": true
+      }
+    ]
+  },
+  "eclipse.musica": {
+    "subtitle": "subtitles.cloudruleta.eclipse",
+    "sounds": [
+      {
+        "name": "cloudruleta:eclipse/musica",
+        "stream": true
+      }
+    ]
+  },
+  "phora.tema_intro": {
+    "subtitle": "subtitles.cloudruleta.phora.tema_intro",
+    "sounds": [
+      {
+        "name": "cloudruleta:phora/tema_intro",
+        "stream": true
+      }
+    ]
+  },
+  "phora.tema_bucle": {
+    "subtitle": "subtitles.cloudruleta.phora.tema_bucle",
+    "sounds": [
+      {
+        "name": "cloudruleta:phora/tema_bucle",
+        "stream": true
+      }
+    ]
+  },
+  "phora.voz": {
+    "subtitle": "subtitles.cloudruleta.phora.voz",
+    "sounds": [
+      {
+        "name": "cloudruleta:phora/voz",
+        "preload": true
+      }
+    ]
+  },
+  "phora.silbido": {
+    "subtitle": "subtitles.cloudruleta.phora.silbido",
+    "sounds": [
+      {
+        "name": "cloudruleta:phora/silbido",
+        "preload": true
+      }
+    ]
+  },
+  "phora.impacto": {
+    "subtitle": "subtitles.cloudruleta.phora.impacto",
+    "sounds": [
+      {
+        "name": "cloudruleta:phora/impacto",
+        "preload": true
+      }
+    ]
+  },
+  "creeper_rojo.pantallazo": {
+    "subtitle": "subtitles.cloudruleta.creeper_rojo.pantallazo",
+    "sounds": [
+      {
+        "name": "cloudruleta:creeper_rojo/pantallazo",
+        "preload": true
+      }
+    ]
+  },
+  "palo.regreso": {
+    "subtitle": "subtitles.cloudruleta.palo.regreso",
+    "sounds": [
+      {
+        "name": "cloudruleta:palo/regreso"
+      }
+    ]
+  }
+}

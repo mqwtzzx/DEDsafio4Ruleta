@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "nuclearcreeper:nuclear_explosion",
-    "supernova:supernova"
+    "cloudruleta_nuclearcreeper:nuclear_explosion",
+    "cloudruleta_supernova:cloudruleta_supernova"
   ]
 }

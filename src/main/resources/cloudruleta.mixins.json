@@ -1,0 +1,28 @@
+{
+	"required": true,
+	"minVersion": "0.8",
+	"package": "net.cloudruleta.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"BlockItemMixin",
+		"BucketItemMixin",
+		"CarvedPumpkinBlockMixin",
+		"EntityMixin",
+		"ExplosionMixin",
+		"LavaFluidMixin",
+		"LevelMixin",
+		"LiquidBlockMixin",
+		"LivingEntityMixin",
+		"MobMixin",
+		"PersistentEntitySectionManagerMixin",
+		"PlayerMixin",
+		"ServerLevelMixin",
+		"ServerPlayerGameModeMixin",
+		"ServerPlayerMixin",
+		"ThrownEnderpearlMixin",
+		"WorldGenRegionMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}

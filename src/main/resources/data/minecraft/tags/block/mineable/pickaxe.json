@@ -1,10 +1,10 @@
 {
   "replace": false,
   "values": [
-    "ruleta:puerta_bunker",
-    "ruleta:ladrillo_bunker",
-    "ruleta:escalera_bunker",
-    "ruleta:piso_bunker",
-    "ruleta:peligro_bunker"
+    "cloudruleta:puerta_bunker",
+    "cloudruleta:ladrillo_bunker",
+    "cloudruleta:escalera_bunker",
+    "cloudruleta:piso_bunker",
+    "cloudruleta:peligro_bunker"
   ]
 }

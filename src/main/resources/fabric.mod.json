@@ -1,36 +1,36 @@
 {
-	"schemaVersion": 1,
-	"id": "ruleta",
-	"version": "${version}",
-	"name": "DEDsafio 4 Ruleta Fan Project",
-	"description": "Recreación fan de la ruleta de la serie DEDsafio 4.\nCódigo de la ruleta generado por Claude (Anthropic).",
-	"authors": [
-		"DarkPlayer"
-	],
-	"contributors": [
-		"Serie DEDsafio 4: EufoniaStudio"
-	],
-	"license": "CC-BY-NC-SA-4.0",
-	"environment": "*",
-	"entrypoints": {
-		"main": [
-			"net.ruleta.Ruleta"
-		],
-		"client": [
-			"net.ruleta.client.RuletaClient"
-		]
-	},
-	"mixins": [
-		"ruleta.mixins.json",
-		{
-			"config": "ruleta.client.mixins.json",
-			"environment": "client"
-		}
-	],
-	"depends": {
-		"fabricloader": ">=${loader_version}",
-		"minecraft": "${minecraft_version}",
-		"java": ">=21",
-		"fabric-api": "*"
-	}
+  "schemaVersion": 1,
+  "id": "cloudruleta",
+  "version": "${version}",
+  "name": "CloudRuleta - DEDsafio 4 Fan Project",
+  "description": "DEDsafio 4 Fan Project for Fabric 1.21.1, isolated under the cloudruleta mod id.",
+  "authors": [
+    "DarkPlayer"
+  ],
+  "contributors": [
+    "Serie DEDsafio 4: EufoniaStudio"
+  ],
+  "license": "CC-BY-NC-SA-4.0",
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "net.cloudruleta.Ruleta"
+    ],
+    "client": [
+      "net.cloudruleta.client.RuletaClient"
+    ]
+  },
+  "mixins": [
+    "cloudruleta.mixins.json",
+    {
+      "config": "cloudruleta.client.mixins.json",
+      "environment": "client"
+    }
+  ],
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "minecraft": "${minecraft_version}",
+    "java": ">=21",
+    "fabric-api": "*"
+  }
 }

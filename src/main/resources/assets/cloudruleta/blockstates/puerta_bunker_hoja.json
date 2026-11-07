@@ -1,0 +1,5 @@
+{
+  "multipart": [
+    { "apply": { "model": "cloudruleta:block/puerta_bunker_vacio" } }
+  ]
+}

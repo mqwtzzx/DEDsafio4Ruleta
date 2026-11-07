@@ -1,0 +1,160 @@
+{
+    "blend": {
+        "func": "add",
+        "srcrgb": "1",
+        "dstrgb": "1-srcalpha"
+    },
+    "vertex": "cloudruleta:agujero_objeto",
+    "fragment": "cloudruleta:agujero_objeto",
+    "attributes": [
+        "Position",
+        "UV0"
+    ],
+    "samplers": [
+        {
+            "name": "Nebulosa"
+        },
+        {
+            "name": "Constelaciones"
+        },
+        {
+            "name": "Escena"
+        },
+        {
+            "name": "EscenaProf"
+        }
+    ],
+    "uniforms": [
+        {
+            "name": "ModelViewMat",
+            "type": "matrix4x4",
+            "count": 16,
+            "values": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        {
+            "name": "ProjMat",
+            "type": "matrix4x4",
+            "count": 16,
+            "values": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        {
+            "name": "VistaMundo",
+            "type": "matrix4x4",
+            "count": 16,
+            "values": [
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0,
+                0.0,
+                0.0,
+                0.0,
+                0.0,
+                1.0
+            ]
+        },
+        {
+            "name": "Tiempo",
+            "type": "float",
+            "count": 1,
+            "values": [
+                0.0
+            ]
+        },
+        {
+            "name": "MezclaCielo",
+            "type": "float",
+            "count": 1,
+            "values": [
+                0.0
+            ]
+        },
+        {
+            "name": "CamRel",
+            "type": "float",
+            "count": 3,
+            "values": [
+                0.0,
+                0.0,
+                -30.0
+            ]
+        },
+        {
+            "name": "QDer",
+            "type": "float",
+            "count": 3,
+            "values": [
+                1.0,
+                0.0,
+                0.0
+            ]
+        },
+        {
+            "name": "QArr",
+            "type": "float",
+            "count": 3,
+            "values": [
+                0.0,
+                1.0,
+                0.0
+            ]
+        },
+        {
+            "name": "Escala",
+            "type": "float",
+            "count": 1,
+            "values": [
+                1.0
+            ]
+        },
+        {
+            "name": "Gris",
+            "type": "float",
+            "count": 1,
+            "values": [
+                0.0
+            ]
+        }
+    ]
+}

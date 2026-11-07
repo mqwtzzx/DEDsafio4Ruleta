@@ -1,8 +1,0 @@
-{
-  "parent": "minecraft:block/inner_stairs",
-  "textures": {
-    "bottom": "ruleta:block/escalera_bunker",
-    "top": "ruleta:block/escalera_bunker",
-    "side": "ruleta:block/escalera_bunker"
-  }
-}

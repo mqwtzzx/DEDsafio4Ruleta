@@ -1,6 +1,6 @@
 {
   "chat": {
-    "translation_key": "ruleta.chat.mensaje",
+    "translation_key": "cloudruleta.chat.mensaje",
     "parameters": [
       "sender",
       "content"

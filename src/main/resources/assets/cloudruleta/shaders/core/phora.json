@@ -1,0 +1,14 @@
+{
+    "blend": { "func": "add", "srcrgb": "srcalpha", "dstrgb": "1-srcalpha" },
+    "vertex": "cloudruleta:phora",
+    "fragment": "cloudruleta:phora",
+    "attributes": [ "Position", "Color", "UV0" ],
+    "samplers": [],
+    "uniforms": [
+        { "name": "ModelViewMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+        { "name": "ProjMat", "type": "matrix4x4", "count": 16, "values": [ 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0 ] },
+        { "name": "Modo", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Tiempo", "type": "float", "count": 1, "values": [ 0.0 ] },
+        { "name": "Semilla", "type": "float", "count": 1, "values": [ 0.0 ] }
+    ]
+}

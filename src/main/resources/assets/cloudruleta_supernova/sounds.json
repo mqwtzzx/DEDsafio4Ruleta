@@ -1,0 +1,8 @@
+{
+  "idle_hum": { "subtitle": "subtitles.cloudruleta_supernova.idle", "sounds": [ { "name": "cloudruleta_supernova:idle_hum", "stream": true } ] },
+  "charge": { "subtitle": "subtitles.cloudruleta_supernova.charge", "sounds": [ { "name": "cloudruleta_supernova:charge", "stream": true } ] },
+  "heartbeat": { "subtitle": "subtitles.cloudruleta_supernova.heartbeat", "sounds": [ { "name": "cloudruleta_supernova:heartbeat" } ] },
+  "blast": { "subtitle": "subtitles.cloudruleta_supernova.blast", "sounds": [ { "name": "cloudruleta_supernova:blast", "stream": true } ] },
+  "wave": { "subtitle": "subtitles.cloudruleta_supernova.wave", "sounds": [ { "name": "cloudruleta_supernova:wave", "stream": true } ] },
+  "music": { "subtitle": "subtitles.cloudruleta_supernova.blast", "sounds": [ { "name": "cloudruleta_supernova:music", "stream": true } ] }
+}

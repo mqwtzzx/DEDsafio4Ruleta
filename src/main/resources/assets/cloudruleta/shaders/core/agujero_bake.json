@@ -1,0 +1,34 @@
+{
+    "vertex": "cloudruleta:agujero_bake",
+    "fragment": "cloudruleta:agujero_bake",
+    "attributes": [
+        "Position"
+    ],
+    "samplers": [],
+    "uniforms": [
+        {
+            "name": "Tiempo",
+            "type": "float",
+            "count": 1,
+            "values": [
+                0.0
+            ]
+        },
+        {
+            "name": "Cara",
+            "type": "float",
+            "count": 1,
+            "values": [
+                0.0
+            ]
+        },
+        {
+            "name": "Modo",
+            "type": "float",
+            "count": 1,
+            "values": [
+                0.0
+            ]
+        }
+    ]
+}
