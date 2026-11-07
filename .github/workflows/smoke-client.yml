@@ -1,0 +1,57 @@
+name: Verificar cliente Fabric 1.21.1
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  client-smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Arrancar cliente con escritorio virtual
+        shell: bash
+        run: |
+          set -euo pipefail
+          command -v xvfb-run
+          chmod +x ./gradlew
+          xvfb-run -a -s '-screen 0 1280x720x24' env LIBGL_ALWAYS_SOFTWARE=1 ./gradlew runClient --no-daemon --stacktrace > client-startup.log 2>&1 &
+          client_pid=$!
+          trap 'kill "$client_pid" 2>/dev/null || true; pkill -P "$client_pid" 2>/dev/null || true' EXIT
+          for ((i=0;i<170;i++)); do
+            if grep -Eqi 'MixinApplyError|InvalidInjectionException|EntrypointException|Could not execute entrypoint|Crash report saved|Reported exception thrown|Failed to start the minecraft client' client-startup.log; then
+              echo "::error::Se detectó un error de inicialización del cliente"
+              tail -150 client-startup.log
+              exit 1
+            fi
+            if grep -Eqi 'OpenAL initialized|OpenGL Renderer:|Sound engine started|Created: [0-9]+x[0-9]+x' client-startup.log; then
+              echo "El cliente ha progresado hasta la inicialización gráfica o de audio."
+              tail -50 client-startup.log
+              exit 0
+            fi
+            if ! kill -0 "$client_pid" 2>/dev/null; then
+              echo "::error::El cliente finalizó prematuramente."
+              tail -150 client-startup.log
+              exit 1
+            fi
+            sleep 1
+          done
+          echo "::error::Cliente no listo tras 170 segundos"
+          tail -150 client-startup.log
+          exit 1
+      - name: Publicar logs del cliente
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostico-cliente-fabric
+          path: |
+            client-startup.log
+            run/logs/latest.log
+            run/crash-reports/*.txt
+          if-no-files-found: warn
