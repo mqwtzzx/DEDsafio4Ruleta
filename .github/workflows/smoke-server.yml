@@ -1,0 +1,51 @@
+name: Verificar arranque del servidor Fabric 1.21.1
+on:
+  push:
+    paths:
+      - 'src/**'
+      - 'build.gradle'
+      - 'gradle.properties'
+      - '.github/workflows/smoke-server.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  server-smoke-test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Arrancar servidor dedicado de prueba (sin mundos ni datos de usuarios)
+        shell: bash
+        run: |
+          set -uo pipefail
+          mkdir -p run
+          printf 'eula=true\n' > run/eula.txt
+          printf 'online-mode=false\nmax-tick-time=-1\n' > run/server.properties
+          chmod +x ./gradlew
+          timeout --signal=TERM --kill-after=10s 180s ./gradlew runServer --no-daemon --stacktrace > server-startup.log 2>&1
+          code=$?
+          tail -100 server-startup.log || true
+          echo "Gradle/test exit code: $code"
+          if grep -Eq 'Done \([0-9.,]+s\)!|Done \([0-9.,]+s\)! For help|Done \(' server-startup.log; then
+            echo "SERVER BOOT SUCCESS: Minecraft reached Done"
+            exit 0
+          fi
+          echo "::error::Server did not reach Done; inspect server-startup.log for the first error"
+          exit 1
+      - name: Publicar registro de arranque
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostico-servidor-dedicado
+          path: |
+            server-startup.log
+            run/logs/latest.log
+            run/crash-reports/*.txt
+          if-no-files-found: warn
