@@ -38,6 +38,11 @@ jobs:
             fi
             if grep -Eqi 'OpenAL initialized|OpenGL Renderer:|Sound engine started|Created: [0-9]+x[0-9]+x' client-startup.log; then
               echo "El cliente ha progresado hasta la inicialización gráfica o de audio."
+              if ! grep -q "cloudruleta" client-startup.log; then
+                echo "::error::CloudRuleta no aparece en el registro del cliente"
+                tail -100 client-startup.log
+                exit 1
+              fi
               tail -50 client-startup.log
               exit 0
             fi
