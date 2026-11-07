@@ -4,6 +4,8 @@ on:
     branches: [cloudruleta]
     paths:
       - 'tools/rename_cloudruleta.py'
+      - 'gradle.properties'
+      - 'build.gradle'
       - '.github/workflows/cloudruleta.yml'
   workflow_dispatch:
 
