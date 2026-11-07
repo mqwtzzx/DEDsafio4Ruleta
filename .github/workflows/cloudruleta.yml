@@ -1,0 +1,116 @@
+name: CloudRuleta - migrar, compilar y probar
+on:
+  push:
+    branches: [cloudruleta]
+    paths:
+      - 'tools/rename_cloudruleta.py'
+      - '.github/workflows/cloudruleta.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  migrate-build-and-verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: cloudruleta
+          persist-credentials: true
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+      - name: Migrar IDs, paquetes y namespaces a CloudRuleta
+        run: |
+          python3 tools/rename_cloudruleta.py
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          m=json.loads(Path('src/main/resources/fabric.mod.json').read_text())
+          assert m['id']=='cloudruleta'
+          assert not Path('src/main/java/net/ruleta').exists()
+          assert Path('src/main/java/net/cloudruleta/Ruleta.java').exists()
+          print('ID, rutas y paquete principal validados')
+          PY
+      - name: Compilar JAR remapeado con Java 21
+        shell: bash
+        run: |
+          set -o pipefail
+          chmod +x ./gradlew
+          ./gradlew clean build --no-daemon --stacktrace 2>&1 | tee cloudruleta-build.log
+      - name: Verificar el JAR y metadatos
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import zipfile, json
+          jars=[p for p in Path('build/libs').glob('*.jar') if not p.name.endswith('-sources.jar')]
+          assert len(jars)==1, jars
+          with zipfile.ZipFile(jars[0]) as z:
+              m=json.loads(z.read('fabric.mod.json'))
+              assert m['id']=='cloudruleta', m
+              assert m['version'].startswith('1.1.0-cloud.'), m
+              assert 'net/cloudruleta/Ruleta.class' in z.namelist()
+              assert 'net/cloudruleta/client/RuletaClient.class' in z.namelist()
+              assert 'cloudruleta.mixins.json' in z.namelist()
+              assert 'cloudruleta.client.mixins.json' in z.namelist()
+              print('JAR_VALIDATED',jars[0],len(z.namelist()), 'entries')
+          PY
+      - name: Arranque real servidor Fabric (smoke test)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p run
+          printf 'eula=true\n' > run/eula.txt
+          chmod +x ./gradlew
+          ./gradlew runServer --no-daemon > cloudruleta-server.log 2>&1 &
+          pid=$!
+          trap 'kill "$pid" 2>/dev/null || true; pkill -P "$pid" 2>/dev/null || true' EXIT
+          for ((i=0;i<120;i++)); do
+            if grep -Eq 'Done \([0-9.,]+s\)!' cloudruleta-server.log; then
+              echo "SERVER_BOOT_OK"
+              grep -E 'cloudruleta|Done \(' cloudruleta-server.log | head -25 || true
+              exit 0
+            fi
+            if ! kill -0 "$pid" 2>/dev/null; then
+              echo "SERVER_BOOT_FAILED"
+              tail -120 cloudruleta-server.log
+              exit 1
+            fi
+            sleep 1
+          done
+          echo "SERVER_TIMEOUT"
+          tail -100 cloudruleta-server.log
+          exit 1
+      - name: Publicar compilación CloudRuleta
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudruleta-fabric-1.21.1
+          path: |
+            build/libs/*.jar
+          if-no-files-found: error
+      - name: Guardar registros
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloudruleta-registros
+          path: |
+            cloudruleta-build.log
+            cloudruleta-server.log
+            run/logs/latest.log
+          if-no-files-found: warn
+      - name: Guardar código migrado en rama cloudruleta
+        if: success()
+        shell: bash
+        run: |
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git config user.name 'github-actions[bot]'
+          git add -A src/main src/client build.gradle gradle.properties
+          if ! git diff --cached --quiet; then
+            git commit -m 'CloudRuleta: aislar mod ID, paquetes, recursos, shaders, redes y mixins'
+            git push origin HEAD:cloudruleta
+          fi
