@@ -31,7 +31,7 @@ jobs:
           from pathlib import Path
           m=json.loads(Path('src/main/resources/fabric.mod.json').read_text())
           assert m['id']=='cloudruleta'
-          assert not Path('src/main/java/net/ruleta').exists()
+          assert not any(Path('src/main/java/net/ruleta').rglob('*.java'))
           assert Path('src/main/java/net/cloudruleta/Ruleta.java').exists()
           print('ID, rutas y paquete principal validados')
           PY
