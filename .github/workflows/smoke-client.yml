@@ -1,5 +1,11 @@
 name: Verificar cliente Fabric 1.21.1
 on:
+  push:
+    paths:
+      - '.github/workflows/smoke-client.yml'
+      - 'src/**'
+      - 'build.gradle'
+      - 'gradle.properties'
   workflow_dispatch:
 
 permissions:
