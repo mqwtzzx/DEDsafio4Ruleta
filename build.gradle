@@ -38,7 +38,10 @@ processResources {
 	]
 	inputs.properties props
 	filesMatching("fabric.mod.json") {
-		expand props
+		// Preserve JSON escapes (notably \\n in description) when substituting version placeholders.
+		expand(props) {
+			escapeBackslash = true
+		}
 	}
 }
 
